@@ -5,7 +5,7 @@ const config = require('./config.js')
 const mc = require('minecraft-protocol');
 const Chunk = require('prismarine-chunk')(config.version)
 
-const { analyse } = require('./analyse.js');
+const { analyse, checkIPs } = require('./analyse.js');
 
 console.log("Starting honeypot...")
 
@@ -28,6 +28,8 @@ const chunk = new Chunk()
 world.setup(chunk, mcData)
 
 console.log("Honeypot started")
+
+setInterval(checkIPs, 60000);
 
 server.on('login', function(client) {
   const loginPacket = mcData.loginPacket
@@ -99,6 +101,10 @@ server.on('login', function(client) {
 
 server.on('error', function (error) {
   console.log('Error:', error)
+})
+
+server.on('connection', function (client) {
+  console.log('New connection from IP:', client.socket.remoteAddress)
 })
 
 server.on('listening', function () {

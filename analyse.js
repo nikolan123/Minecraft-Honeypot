@@ -3,8 +3,8 @@ const config = require('./config.js')
 const moment = require('moment');
 const discord = require('./discord.js')
 
-// local database to store reported IPs and their timestamps
-const reportedIPs = new Map();
+const reportedIPs = new Map(); // Map<ip, TimeStamp> Used to prevent an IP being reported more than once in 24 hours
+const tempMap = new Map();
 
 
 function analyse(client){
@@ -22,10 +22,25 @@ function analyse(client){
         if (lastReportedAt && moment().diff(lastReportedAt, 'hours') < 24) {
             console.log('IP '+client.socket.remoteAddress+' has been reported within the last 24 hours, not reporting');
         } else {
-            reportIP(client.socket.remoteAddress);
+            if (!tempMap.has(client.socket.remoteAddress))
+                tempMap.set(client.socket.remoteAddress, new Date().getTime());
         }
     }
 }
+
+function checkIPs() {
+    const currentTime = new Date().getTime();
+  
+    for (const [ip, timestamp] of tempMap.entries()) {
+      const threshold = Math.floor(Math.random() * (3600000 - 900000 + 1)) + 900000; // Random time between 15 minutes and 60 minutes in milliseconds, this NEEDS to be done better
+  
+      if (currentTime - timestamp >= threshold) {
+        console.log(`IP ${ip} exceeded its threshold, reporting.`);
+        reportIP(ip);
+        tempMap.delete(ip);
+      }
+    }
+  }
 
 async function reportIP(ip) {
     try {
@@ -43,7 +58,6 @@ async function reportIP(ip) {
       if (response.status === 200) {
         reportedIPs.set(ip, moment());
         console.log('IP reported successfully:', ip);
-        console.log('Report ID:', response.data.data.reportId);
       } else {
         console.log('Failed to report IP:', ip);
       }
@@ -53,5 +67,6 @@ async function reportIP(ip) {
 }
 
 module.exports = {
-    analyse
+    analyse,
+    checkIPs
 }
