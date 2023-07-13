@@ -1,0 +1,16 @@
+{
+  "name": "minecraft-honeypot",
+  "version": "1.0.0",
+  "description": "A honeypot Minecraft server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "minecraft-protocol": "^1.43.1",
+    "moment": "^2.29.4",
+    "prismarine-chunk": "^1.34.0"
+  }
+}
