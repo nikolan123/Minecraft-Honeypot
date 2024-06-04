@@ -1,7 +1,7 @@
 const host = '0.0.0.0'
 
 const port = 25565
-const version = '1.20.4'
+const version = '1.16.5'
 const motd = "meow"
 
 const abuseipdb_key = "";
