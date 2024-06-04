@@ -7,7 +7,7 @@ apt update -y
 node_version=$(node -v 2>/dev/null)
 if [ -z "$node_version" ]; then
   echo "Node.js not found. Installing Node.js..."
-  curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+  curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
   sudo apt install -y nodejs
   echo "Node.js installed successfully."
 else
