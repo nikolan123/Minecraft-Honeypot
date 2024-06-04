@@ -14,6 +14,7 @@ const server = mc.createServer({
   'online-mode': true,
   encryption: true,
   host: config.host,
+  motd: config.motd,
   port: config.port,
   version: config.version,
   beforePing: async (response, client, callback) => {
