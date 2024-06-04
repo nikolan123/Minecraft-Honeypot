@@ -8,6 +8,7 @@ const abuseipdb_key = "";
 const report_ip = true;
 
 const discord_webhook = "";
+const discord_webhook2 = "";
 const send_to_webhook = true;
 
 module.exports = {
