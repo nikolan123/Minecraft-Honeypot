@@ -15,7 +15,7 @@ async function sendEmbedToWebhook(client) {
     else
         embed = {
             title: 'Join attempt',
-            description: '**Username:** $client.username, **IP:** $client.socket.remoteAddress',
+            description: '**Username:** ${client.username}, **IP:** ${client.socket.remoteAddress}',
             color: 0xFF0000,
             timestamp: new Date().toISOString(),
         };
