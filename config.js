@@ -19,6 +19,7 @@ module.exports = {
     abuseipdb_key,
     report_ip,
     discord_webhook,
+    discord_webhook2,
     send_to_webhook
 
 }
