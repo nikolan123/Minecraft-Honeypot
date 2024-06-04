@@ -1,16 +1,6 @@
 #!/bin/bash
 
 apt update -y
-apt upgrade -y
-
-read -p "Enter your AbuseIPDB API key: " abuseipdb_key
-read -p "Enter your Discord webhook URL: " discord_webhook
-
-sed -i '/^export ABUSEIPDB_API_KEY/d' ~/.bashrc
-sed -i '/^export DISCORD_WEBHOOK_URL/d' ~/.bashrc
-
-echo "export ABUSEIPDB_API_KEY=$abuseipdb_key" >> ~/.bashrc
-echo "export DISCORD_WEBHOOK_URL=$discord_webhook" >> ~/.bashrc
 
 . ~/.bashrc
 
@@ -27,3 +17,4 @@ fi
 echo "Installing required packages..."
 npm install
 echo "Dependencies installed successfully."
+echo "Config file is config.js"
