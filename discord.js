@@ -7,36 +7,17 @@ async function sendEmbedToWebhook(client) {
 
     if(client.username == null)
         embed = {
-            title: 'Minecraft Honeypot',
-            description: 'The server has been pinged',
+            title: 'Server Pinged',
+            description: client.socket.remoteAddress,
             color: 0xFF0000,
             timestamp: new Date().toISOString(),
-            fields: [
-            {
-                name: 'IP',
-                value: client.socket.remoteAddress,
-                inline: true,
-            },
-            ],
         };
     else
         embed = {
-            title: 'Minecraft Honeypot',
-            description: 'A player connected to the server',
+            title: 'Join attempt',
+            description: '**Username:** $client.username, **IP:** $client.socket.remoteAddress',
             color: 0xFF0000,
             timestamp: new Date().toISOString(),
-            fields: [
-                {
-                    name: 'Username',
-                    value: client.username,
-                    inline: true,
-                },
-                {
-                    name: 'IP',
-                    value: client.socket.remoteAddress,
-                    inline: true,
-                },
-            ],
         };
       
     try {
