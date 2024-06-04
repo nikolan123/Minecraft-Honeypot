@@ -46,7 +46,7 @@ async function reportIP(ip) {
     try {
       const response = await axios.post('https://api.abuseipdb.com/api/v2/report', {
         ip: ip,
-        categories: [14, 15], // 14 = portscan, 15 = hacking
+        categories: [14], // 14 = portscan, 15 = hacking
         comment: 'Scanning for Minecraft servers (port '+config.port+')',
       }, {
         headers: {
