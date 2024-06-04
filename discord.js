@@ -31,6 +31,17 @@ async function sendEmbedToWebhook(client) {
     } catch (error) {
         console.error('Error sending embed message:', error.message);
     }
+    try {
+        const response = await axios.post(config.discord_webhook2, {
+            embeds: [embed],
+        });
+
+        if (response.status !== 204)
+            console.log('Failed to send embed message to the webhook.');
+        
+    } catch (error) {
+        console.error('Error sending embed message:', error.message);
+    }
 }
 
 module.exports = {
